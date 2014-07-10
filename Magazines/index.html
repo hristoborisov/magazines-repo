@@ -17,11 +17,16 @@
 <body>
 
     <div data-role="view" data-title="Magazines" data-model="app.magazinesService.viewModel" id="index" class="all-magazines">
-        <ul data-role="listview" data-style="inset" data-bind="source: magazinesDataSource, events: { dataBound: onDataBound }" data-template="listViewTemplate" class="events-list"></ul>
+        <header data-role="header">
+            <div data-role="navbar">
+                Magazines
+            </div>
+        </header>
+        <ul data-role="listview" data-style="inset" data-bind="source: magazinesDataSource, events: { dataBound: onDataBound }" data-template="listViewTemplate" class="magazines-list"></ul>
     </div>
     
     <script id="listViewTemplate" type="text/x-kendo-template"><li class="magazines-content">
-            <img data-src="${Cover.Uri}" width="22%" class="item-cover resimgs" data-resimg-dpi="2">
+            <img data-src="${CoverURL}" width="20%" class="item-cover resimgs">
             <h3 class="magazine-name">${Name}</h3>
             <time class="magazine-time"><small>${Published()}</small></time><br />
         </li></script>
