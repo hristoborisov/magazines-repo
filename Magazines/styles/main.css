@@ -1,11 +1,11 @@
 .item-cover {
     float: left;
-    margin-right: 10px;
+    margin-right: 2.5%;
 }
 
 .magazine-name {
     margin-top: 0px;
-    
+    margin-bottom: 0;
 }
 
 .magazine-time {

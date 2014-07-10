@@ -17,7 +17,7 @@
                     "SingleField": "Uri"
                 }
             };
-
+             
             //Retrieving a subset of the fields to optimize the payload
             var filterExpression = {
                 "Name": 1,
@@ -31,8 +31,8 @@
                     typeName: "Magazines",
                     read: {
                         beforeSend: function (xhr) {
-                            xhr.setRequestHeader("X-Everlive-Expand", JSON.stringify(expandExpression));
-                            xhr.setRequestHeader("X-Everlive-Fields", JSON.stringify(filterExpression));
+                           xhr.setRequestHeader("X-Everlive-Expand", JSON.stringify(expandExpression));
+                           xhr.setRequestHeader("X-Everlive-Fields", JSON.stringify(filterExpression));
                         }
                     }
                 },
@@ -61,9 +61,8 @@
             var viewModel = app.magazinesService.viewModel.magazinesDataSource.getByUid(clickedItemUid);
 
             kendo.bind(e.view.element, viewModel);
-
             everliveImages.responsiveAll();
-        }
+        },
     });
 
     app.magazinesService = {
