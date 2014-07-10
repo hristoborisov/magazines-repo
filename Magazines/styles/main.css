@@ -5,9 +5,13 @@
 
 .magazine-name {
     margin-top: 0px;
+    
 }
 
 .magazine-time {
     color: #666;
-    vertical-align: top;
+}
+
+.detailed-title {
+    padding:20px;
 }

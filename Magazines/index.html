@@ -18,17 +18,29 @@
 
     <div data-role="view" data-title="Magazines" data-model="app.magazinesService.viewModel" id="index" class="all-magazines">
         <header data-role="header">
-            <div data-role="navbar">
+            <div data-role="navbar" class="header-text">
                 Magazines
             </div>
         </header>
-        <ul data-role="listview" data-style="inset" data-bind="source: magazinesDataSource, events: { dataBound: onDataBound }" data-template="listViewTemplate" class="magazines-list"></ul>
+        <ul data-role="listview" data-style="inset" data-bind="source: magazinesDataSource, events: { dataBound: onDataBound}" data-template="listViewTemplate" class="magazines-list"></ul>
     </div>
-    
-    <script id="listViewTemplate" type="text/x-kendo-template"><li class="magazines-content">
+
+    <script id="listViewTemplate" type="text/x-kendo-template">
+        <div data-bind="events: {click: onItemClick }">
             <img data-src="${CoverURL}" width="20%" class="item-cover resimgs">
             <h3 class="magazine-name">${Name}</h3>
             <time class="magazine-time"><small>${Published()}</small></time><br />
-        </li></script>
+        </div>
+    </script>
+
+    <div data-role="view" data-title="Magazine" id="singleItem" class="all-magazines" data-show="app.magazinesService.viewModel.onItemViewShow">
+        <header data-role="header">
+            <div data-role="navbar" class="header-text">
+                <a data-role="backbutton" data-align="left">Back</a>
+                Magazine Details
+            </div>
+        </header>
+        <img id="detailedImage" data-bind="attr: {data-src : CoverURL }" width="100%" class="resimgs">        
+    </div>
 </body>
 </html>

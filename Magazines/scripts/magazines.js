@@ -2,6 +2,8 @@
     var app = global.app = global.app || {};
 
     var MagazinesViewModel = kendo.data.ObservableObject.extend({
+        magazinesDataSource: null,
+        
         init: function () {
             kendo.data.ObservableObject.fn.init.call(this);
 
@@ -20,7 +22,7 @@
             var filterExpression = {
                 "Name": 1,
                 "PublishedDate": 1,
-                "Cover" : 1
+                "Cover": 1
             };
 
             var dataSource = new kendo.data.DataSource({
@@ -36,13 +38,6 @@
                 },
                 schema: {
                     model: {
-                        id: Everlive.idField,
-                        fields: {
-                            Name: {
-                                field: "Name",
-                                defaultValue: ""
-                            }
-                        },
                         Published: function () {
                             return kendo.toString(this.PublishedDate, "MMMM yyyy");
                         }
@@ -54,6 +49,19 @@
         },
 
         onDataBound: function (e) {
+           everliveImages.responsiveAll();
+        },
+
+        onItemClick: function (e) {
+            app.application.navigate("#singleItem?uid=" + e.data.uid);
+        },
+
+        onItemViewShow: function (e) {
+            var clickedItemUid = e.view.params.uid;
+            var viewModel = app.magazinesService.viewModel.magazinesDataSource.getByUid(clickedItemUid);
+
+            kendo.bind(e.view.element, viewModel);
+
             everliveImages.responsiveAll();
         }
     });
