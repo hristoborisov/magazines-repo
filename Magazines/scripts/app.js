@@ -10,7 +10,7 @@
         everliveImages.init("9bWBbo13WFgt2qxs");
 
         //initializing the feedback comopnent with your Feedback API Key
-        //feedback.initialize('5a34f640-0761-11e4-81ff-9b933124bfc8');
+        feedback.initialize('5a34f640-0761-11e4-81ff-9b933124bfc8');
 
     }, false);
 
