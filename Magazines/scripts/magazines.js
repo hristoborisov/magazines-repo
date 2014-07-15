@@ -3,22 +3,22 @@
 
     var MagazinesViewModel = kendo.data.ObservableObject.extend({
         magazinesDataSource: null,
-        
+
         init: function () {
             kendo.data.ObservableObject.fn.init.call(this);
 
-            //Initializing the Backend Services SDK with an API Key
+            // initialize the Backend Services SDK with an API Key
             var el = new Everlive("9bWBbo13WFgt2qxs");
 
-            //Retrieving the Image URL from the Files table using expand
+            // retrieve the image URL from the Files table using expand
             var expandExpression = {
                 "Cover": {
                     "ReturnAs": "CoverURL",
                     "SingleField": "Uri"
                 }
             };
-             
-            //Retrieving a subset of the fields to optimize the payload
+
+            // retrieve a subset of the fields to optimize the payload
             var filterExpression = {
                 "Name": 1,
                 "PublishedDate": 1,
@@ -31,14 +31,14 @@
                     typeName: "Magazines",
                     read: {
                         beforeSend: function (xhr) {
-                           xhr.setRequestHeader("X-Everlive-Expand", JSON.stringify(expandExpression));
-                           xhr.setRequestHeader("X-Everlive-Fields", JSON.stringify(filterExpression));
+                            xhr.setRequestHeader("X-Everlive-Expand", JSON.stringify(expandExpression));
+                            xhr.setRequestHeader("X-Everlive-Fields", JSON.stringify(filterExpression));
                         }
                     }
                 },
                 schema: {
                     model: {
-                        Published: function () {
+                        PublishedOn: function () {
                             return kendo.toString(this.PublishedDate, "MMMM yyyy");
                         }
                     }
@@ -49,20 +49,20 @@
         },
 
         onDataBound: function (e) {
-           everliveImages.responsiveAll();
+            everliveImages.responsiveAll();
         },
 
         onItemClick: function (e) {
-            app.application.navigate("#singleItem?uid=" + e.data.uid);
+            app.application.navigate("#details?id=" + e.dataItem.id);
         },
 
         onItemViewShow: function (e) {
-            var clickedItemUid = e.view.params.uid;
-            var viewModel = app.magazinesService.viewModel.magazinesDataSource.getByUid(clickedItemUid);
+            var itemId = e.view.params.id;
+            var viewModel = app.magazinesService.viewModel.magazinesDataSource.get(itemId);
 
             kendo.bind(e.view.element, viewModel);
             everliveImages.responsiveAll();
-        },
+        }
     });
 
     app.magazinesService = {
