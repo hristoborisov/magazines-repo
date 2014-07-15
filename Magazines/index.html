@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title></title>
     <meta charset="utf-8" />
+
+    <title>Responsive Images Sample Application</title>
+
     <link href="kendo/styles/kendo.mobile.all.min.css" rel="stylesheet" />
     <link href="styles/main.css" rel="stylesheet" />
 
@@ -15,32 +17,47 @@
     <script src="scripts/magazines.js"></script>
 </head>
 <body>
+    <div data-role="view" id="index"
+         data-title="Magazines"
+         data-model="app.magazinesService.viewModel">
 
-    <div data-role="view" data-title="Magazines" data-model="app.magazinesService.viewModel" id="index" class="all-magazines">
         <header data-role="header">
-            <div data-role="navbar" class="header-text">
+            <div data-role="navbar">
                 Magazines
             </div>
         </header>
-        <ul data-role="listview" data-style="inset" data-bind="source: magazinesDataSource, events: { dataBound: onDataBound}" data-template="listViewTemplate" class="magazines-list"></ul>
+
+        <div data-role="listview"
+             data-style="inset"
+             data-bind="
+                 source: magazinesDataSource,
+                 events: {
+                     dataBound: onDataBound,
+                     click: onItemClick
+                 }"
+             data-template="listview-template"></div>
     </div>
 
-    <script id="listViewTemplate" type="text/x-kendo-template">
-        <div data-bind="events: {click: onItemClick }">
-            <img data-src="${CoverURL}" width="30%" class="item-cover resimgs">
-            <h3 class="magazine-name">${Name}</h3>
-            <time class="magazine-time"><small>${Published()}</small></time><br />
+    <script id="listview-template" type="text/x-kendo-template">
+        <div class="magazine">
+            <img data-src="#= CoverURL #" width="30%" class="resimgs">
+            <h3>#: Name #</h3>
+            <time>#: PublishedOn() #</time>
         </div>
     </script>
 
-    <div data-role="view" data-title="Magazine" id="singleItem" class="all-magazines" data-show="app.magazinesService.viewModel.onItemViewShow">
+    <div data-role="view" id="details"
+         data-title="Magazine"
+         data-show="app.magazinesService.viewModel.onItemViewShow">
+
         <header data-role="header">
-            <div data-role="navbar" class="header-text">
+            <div data-role="navbar">
                 <a data-role="backbutton" data-align="left">Back</a>
                 Magazine Details
             </div>
         </header>
-        <img id="detailedImage" data-bind="attr: {data-src : CoverURL }" width="100%" class="resimgs">        
+
+        <img data-bind="attr: { data-src: CoverURL }" width="100%" class="resimgs">
     </div>
 </body>
 </html>

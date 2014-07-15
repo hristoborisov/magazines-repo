@@ -1,17 +1,14 @@
-.item-cover {
+.magazine img {
     float: left;
     margin-right: 2.5%;
 }
 
-.magazine-name {
+.magazine h3 {
     margin-top: 0px;
     margin-bottom: 0;
 }
 
-.magazine-time {
+.magazine time {
     color: #666;
-}
-
-.detailed-title {
-    padding:20px;
+    font-size: .8125em;
 }
